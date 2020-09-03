@@ -11,7 +11,6 @@ const App:React.FC = ():JSX.Element => {
   useEffect(() => {
     const onLoad = () => {
       setWindowHeight(getWindowHeight());
-      console.log(windowHeight);
     }
     window.addEventListener('load', onLoad);
     return () => {

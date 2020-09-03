@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect} from 'react';
 
 type Props = {
   windowHeight: number,
@@ -8,9 +8,6 @@ type Props = {
 const Section:React.FC<Props> = ({windowHeight, img}):JSX.Element => {
 
   const getPageYOffset = ():number => window.pageYOffset;
-
-  const [positionY, setPositionY] = useState<string>('top');
-
   const ref = useRef<HTMLElement>(null);
   
   useEffect(() => {
@@ -20,7 +17,7 @@ const Section:React.FC<Props> = ({windowHeight, img}):JSX.Element => {
         const offsetTop = ref.current.offsetTop;
         const scrollY = offsetTop - windowHeight;
         const bgYStart = (pageY > scrollY) ? `${(pageY - offsetTop) * 0.25 }px` : 'top';
-        setPositionY(bgYStart);
+        ref.current.style.backgroundPositionY = bgYStart;
       }
     }
     window.addEventListener('scroll', onScroll);
@@ -33,7 +30,6 @@ const Section:React.FC<Props> = ({windowHeight, img}):JSX.Element => {
     height: '800px',
     width: '100%',  
     backgroundPositionX: 'center',
-    backgroundPositionY: `${positionY}`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundImage: `url(${img})`
